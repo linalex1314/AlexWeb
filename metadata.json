@@ -1,0 +1,5 @@
+{
+  "name": "TechLead Portfolio",
+  "description": "A professional, dark-blue themed portfolio website designed for a senior full-stack developer. Features a 'Live Edit' mode allowing the user to modify content directly on the page, simulating a CMS backend. Prioritizes technical skills and showcases a detailed project history.",
+  "requestFramePermissions": []
+}
