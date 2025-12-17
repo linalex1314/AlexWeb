@@ -66,14 +66,12 @@ export const Navbar: React.FC = () => {
         <div className="flex justify-between items-center">
             {/* Logo Area */}
             <div 
-                className="flex items-center gap-2 group cursor-pointer" 
+                className="flex items-center gap-3 group cursor-pointer" 
                 onClick={() => switchPage('home')}
             >
-                <div className="p-2 bg-slate-900 rounded-lg group-hover:bg-amber-600 transition-colors shadow-lg shadow-slate-400/20">
-                    <Terminal className="w-5 h-5 text-white" />
-                </div>
+                <img src="/logo.png" alt="Fidogood" className="w-10 h-10 object-contain" />
                 <span className="text-2xl font-bold text-white tracking-wider">
-                    DEV.LOG <span className="text-sm font-normal text-amber-500 ml-1 block sm:inline">{currentPage === 'cms' ? 'CMS Mode' : 'Portfolio'}</span>
+                    Fidogood <span className="text-sm font-normal text-amber-500 ml-1 block sm:inline">{currentPage === 'cms' ? 'CMS Mode' : '飛朵資訊'}</span>
                 </span>
             </div>
             
