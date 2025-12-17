@@ -30,6 +30,14 @@ export const Contact: React.FC = () => {
         const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
         const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+        // 檢查環境變數是否存在
+        if (!serviceId || !templateId || !publicKey) {
+            console.error('EmailJS configuration missing:', { serviceId: !!serviceId, templateId: !!templateId, publicKey: !!publicKey });
+            setFormStatus('error');
+            setTimeout(() => setFormStatus('idle'), 5000);
+            return;
+        }
+
         try {
             const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
                 method: 'POST',
@@ -55,6 +63,8 @@ export const Contact: React.FC = () => {
                 setFormData({ name: '', email: '', subject: '', message: '' });
                 setTimeout(() => setFormStatus('idle'), 5000);
             } else {
+                const errorText = await response.text();
+                console.error('EmailJS error response:', response.status, errorText);
                 throw new Error('Failed to send');
             }
         } catch (error) {
