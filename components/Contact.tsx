@@ -30,15 +30,23 @@ export const Contact: React.FC = () => {
         const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
         const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+        console.log('EmailJS Config Check:', { 
+            hasServiceId: !!serviceId, 
+            hasTemplateId: !!templateId, 
+            hasPublicKey: !!publicKey 
+        });
+
         // 檢查環境變數是否存在
         if (!serviceId || !templateId || !publicKey) {
-            console.error('EmailJS configuration missing:', { serviceId: !!serviceId, templateId: !!templateId, publicKey: !!publicKey });
+            console.error('EmailJS configuration missing!');
+            alert('郵件服務設定錯誤，請聯繫網站管理員。');
             setFormStatus('error');
             setTimeout(() => setFormStatus('idle'), 5000);
             return;
         }
 
         try {
+            console.log('Sending email...');
             const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
                 method: 'POST',
                 headers: {
@@ -58,6 +66,8 @@ export const Contact: React.FC = () => {
                 })
             });
 
+            console.log('Response status:', response.status);
+
             if (response.ok) {
                 setFormStatus('success');
                 setFormData({ name: '', email: '', subject: '', message: '' });
@@ -65,6 +75,7 @@ export const Contact: React.FC = () => {
             } else {
                 const errorText = await response.text();
                 console.error('EmailJS error response:', response.status, errorText);
+                alert('發送失敗: ' + errorText);
                 throw new Error('Failed to send');
             }
         } catch (error) {
