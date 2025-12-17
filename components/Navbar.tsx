@@ -25,7 +25,7 @@ export const Navbar: React.FC = () => {
     }
   }, [isLoginMode]);
 
-  const navClass = "fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-amber-600/30 shadow-md transition-all duration-300";
+  const navClass = "fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-md transition-all duration-300";
 
   const navItems = [
     { label: '自我介紹', id: 'about', icon: User },
@@ -70,8 +70,8 @@ export const Navbar: React.FC = () => {
                 onClick={() => switchPage('home')}
             >
                 <img src="/logo.png" alt="Fidogood" className="w-10 h-10 object-contain" />
-                <span className="text-2xl font-bold text-white tracking-wider">
-                    Fidogood <span className="text-sm font-normal text-amber-500 ml-1 block sm:inline">{currentPage === 'cms' ? 'CMS Mode' : '飛朵資訊'}</span>
+                <span className="text-2xl font-bold text-slate-800 tracking-wider">
+                    Fidogood <span className="text-sm font-normal text-blue-600 ml-1 block sm:inline">{currentPage === 'cms' ? 'CMS Mode' : '飛朵資訊'}</span>
                 </span>
             </div>
             
@@ -84,7 +84,7 @@ export const Navbar: React.FC = () => {
                     <button
                     key={item.label}
                     onClick={() => handleScroll(item.id)}
-                    className="flex items-center gap-2 px-4 py-2 text-lg font-bold text-slate-200 hover:text-amber-400 hover:bg-slate-800 rounded-lg transition-all duration-200"
+                    className="flex items-center gap-2 px-4 py-2 text-lg font-bold text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
                     >
                     <IconComponent className="w-4 h-4" />
                     {item.label}
@@ -120,7 +120,7 @@ export const Navbar: React.FC = () => {
                         <div className="h-4 w-px bg-slate-200 mx-1"></div>
                         <button 
                             type="submit"
-                            className="p-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-md transition-colors"
+                            className="p-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
                         >
                             <Check className="w-4 h-4" />
                         </button>
@@ -135,7 +135,7 @@ export const Navbar: React.FC = () => {
                 ) : (
                     <button
                         onClick={() => setIsLoginMode(true)}
-                        className="flex items-center gap-2 px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-md text-base font-semibold transition-colors shadow-md hover:shadow-lg"
+                        className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-base font-semibold transition-colors shadow-md hover:shadow-lg"
                     >
                         <Settings className="w-4 h-4" />
                         <span>進入後台</span>
@@ -144,7 +144,7 @@ export const Navbar: React.FC = () => {
             ) : (
                 <button
                     onClick={handleExitCMS}
-                    className="flex items-center gap-2 px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-md text-base font-semibold transition-colors shadow-md"
+                    className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-base font-semibold transition-colors shadow-md"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     <span>返回前台</span>
@@ -159,7 +159,7 @@ export const Navbar: React.FC = () => {
                         setIsMenuOpen(!isMenuOpen);
                         setIsLoginMode(false); 
                     }}
-                    className="p-2 text-slate-200 hover:text-amber-400 focus:outline-none"
+                    className="p-2 text-slate-700 hover:text-blue-600 focus:outline-none"
                 >
                     {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
@@ -169,7 +169,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-          <div className="md:hidden bg-slate-900 border-t border-amber-600/30 absolute w-full shadow-xl">
+          <div className="md:hidden bg-white border-t border-slate-200 absolute w-full shadow-xl">
               <div className="px-4 pt-2 pb-6 space-y-2">
                   {currentPage === 'home' && navItems.map((item) => {
                       const IconComponent = item.icon;
@@ -177,7 +177,7 @@ export const Navbar: React.FC = () => {
                       <button
                           key={item.label}
                           onClick={() => handleScroll(item.id)}
-                          className="flex items-center gap-3 w-full text-left px-4 py-3 text-xl font-bold text-slate-200 hover:text-amber-400 hover:bg-slate-800 rounded-lg"
+                          className="flex items-center gap-3 w-full text-left px-4 py-3 text-xl font-bold text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg"
                       >
                           <IconComponent className="w-5 h-5" />
                           {item.label}
@@ -185,11 +185,11 @@ export const Navbar: React.FC = () => {
                       );
                   })}
                   
-                  <div className="pt-4 mt-4 border-t border-slate-700">
+                  <div className="pt-4 mt-4 border-t border-slate-200">
                     {currentPage === 'home' ? (
                         isLoginMode ? (
-                             <form onSubmit={handleLoginSubmit} className="flex flex-col gap-3 p-3 bg-slate-800 rounded-xl border border-slate-700 shadow-inner">
-                                <div className="text-sm font-bold text-slate-300 mb-1 ml-1">請輸入管理密碼：</div>
+                             <form onSubmit={handleLoginSubmit} className="flex flex-col gap-3 p-3 bg-slate-100 rounded-xl border border-slate-200 shadow-inner">
+                                <div className="text-sm font-bold text-slate-600 mb-1 ml-1">請輸入管理密碼：</div>
                                 <div className="flex items-center gap-2 bg-white px-3 py-2.5 rounded-lg border border-slate-300 shadow-sm focus-within:ring-2 focus-within:ring-amber-500/20">
                                     <KeyRound className="w-5 h-5 text-slate-400 flex-shrink-0" />
                                     <div className="flex-1 relative">
@@ -230,7 +230,7 @@ export const Navbar: React.FC = () => {
                         ) : (
                             <button
                                 onClick={() => setIsLoginMode(true)}
-                                className="flex w-full items-center justify-center gap-2 px-4 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-base font-semibold shadow-md active:scale-[0.98] transition-transform"
+                                className="flex w-full items-center justify-center gap-2 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-base font-semibold shadow-md active:scale-[0.98] transition-transform"
                             >
                                 <Settings className="w-4 h-4" />
                                 進入後台
@@ -239,7 +239,7 @@ export const Navbar: React.FC = () => {
                     ) : (
                         <button
                             onClick={handleExitCMS}
-                            className="flex w-full items-center justify-center gap-2 px-4 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-base font-semibold shadow-md active:scale-[0.98] transition-transform"
+                            className="flex w-full items-center justify-center gap-2 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-base font-semibold shadow-md active:scale-[0.98] transition-transform"
                         >
                             <ArrowLeft className="w-4 h-4" />
                             返回前台

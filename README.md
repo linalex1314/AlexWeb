@@ -1,4 +1,4 @@
-# DEV.LOG Portfolio
+# Fidogood 飛朵資訊
 
 個人專業作品集網站，展示技術能力與專案經歷。
 
@@ -80,12 +80,12 @@ App
 
 | 區塊 | 背景色調 | 強調色 |
 |------|---------|--------|
-| Navbar | slate-900 | amber |
+| Navbar | white (淺色系) | blue |
 | Hero（自我介紹） | cyan/sky/blue | cyan |
 | Skills（萬能工具箱） | slate/zinc/neutral | lime |
 | Projects（專案戰績） | orange/red/rose | amber |
 | Contact（和我聯絡） | slate/indigo | violet |
-| Footer | slate-950 | amber |
+| Footer | slate-100 (淺色系) | blue |
 
 ---
 
