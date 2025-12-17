@@ -25,7 +25,7 @@ export const Navbar: React.FC = () => {
     }
   }, [isLoginMode]);
 
-  const navClass = "fixed top-0 left-0 right-0 z-50 bg-slate-100/95 backdrop-blur-md border-b border-slate-200 shadow-md transition-all duration-300";
+  const navClass = "fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-amber-600/30 shadow-md transition-all duration-300";
 
   const navItems = [
     { label: '關於本帳', id: 'about' },
@@ -44,7 +44,8 @@ export const Navbar: React.FC = () => {
 
   const handleLoginSubmit = (e?: React.FormEvent) => {
       e?.preventDefault();
-      if (password === 'tonylin1') {
+      const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD || '';
+      if (password === adminPassword) {
           switchPage('cms');
           setIsMenuOpen(false);
           setIsLoginMode(false);
@@ -71,8 +72,8 @@ export const Navbar: React.FC = () => {
                 <div className="p-2 bg-slate-900 rounded-lg group-hover:bg-amber-600 transition-colors shadow-lg shadow-slate-400/20">
                     <Terminal className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-xl font-bold text-slate-800 tracking-wider">
-                    DEV.LOG <span className="text-xs font-normal text-amber-700 ml-1 block sm:inline">{currentPage === 'cms' ? 'CMS Mode' : 'Portfolio'}</span>
+                <span className="text-2xl font-bold text-white tracking-wider">
+                    DEV.LOG <span className="text-sm font-normal text-amber-500 ml-1 block sm:inline">{currentPage === 'cms' ? 'CMS Mode' : 'Portfolio'}</span>
                 </span>
             </div>
             
@@ -83,7 +84,7 @@ export const Navbar: React.FC = () => {
                     <button
                     key={item.label}
                     onClick={() => handleScroll(item.id)}
-                    className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-amber-700 hover:bg-orange-50 rounded-lg transition-all duration-200"
+                    className="px-4 py-2 text-base font-semibold text-slate-200 hover:text-amber-400 hover:bg-slate-800 rounded-lg transition-all duration-200"
                     >
                     {item.label}
                     </button>
@@ -132,7 +133,7 @@ export const Navbar: React.FC = () => {
                 ) : (
                     <button
                         onClick={() => setIsLoginMode(true)}
-                        className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-md text-sm font-medium transition-colors shadow-md hover:shadow-lg"
+                        className="flex items-center gap-2 px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-md text-base font-semibold transition-colors shadow-md hover:shadow-lg"
                     >
                         <Settings className="w-4 h-4" />
                         <span>進入後台</span>
@@ -141,7 +142,7 @@ export const Navbar: React.FC = () => {
             ) : (
                 <button
                     onClick={handleExitCMS}
-                    className="flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-md text-sm font-medium transition-colors shadow-md"
+                    className="flex items-center gap-2 px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-md text-base font-semibold transition-colors shadow-md"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     <span>返回前台</span>
@@ -156,7 +157,7 @@ export const Navbar: React.FC = () => {
                         setIsMenuOpen(!isMenuOpen);
                         setIsLoginMode(false); 
                     }}
-                    className="p-2 text-slate-600 hover:text-slate-900 focus:outline-none"
+                    className="p-2 text-slate-200 hover:text-amber-400 focus:outline-none"
                 >
                     {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
@@ -166,23 +167,23 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-slate-200 absolute w-full shadow-xl">
+          <div className="md:hidden bg-slate-900 border-t border-amber-600/30 absolute w-full shadow-xl">
               <div className="px-4 pt-2 pb-6 space-y-2">
                   {currentPage === 'home' && navItems.map((item) => (
                       <button
                           key={item.label}
                           onClick={() => handleScroll(item.id)}
-                          className="block w-full text-left px-4 py-3 text-base font-medium text-slate-600 hover:text-amber-700 hover:bg-orange-50 rounded-lg"
+                          className="block w-full text-left px-4 py-3 text-lg font-semibold text-slate-200 hover:text-amber-400 hover:bg-slate-800 rounded-lg"
                       >
                           {item.label}
                       </button>
                   ))}
                   
-                  <div className="pt-4 mt-4 border-t border-slate-100">
+                  <div className="pt-4 mt-4 border-t border-slate-700">
                     {currentPage === 'home' ? (
                         isLoginMode ? (
-                             <form onSubmit={handleLoginSubmit} className="flex flex-col gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200 shadow-inner">
-                                <div className="text-sm font-bold text-slate-500 mb-1 ml-1">請輸入管理密碼：</div>
+                             <form onSubmit={handleLoginSubmit} className="flex flex-col gap-3 p-3 bg-slate-800 rounded-xl border border-slate-700 shadow-inner">
+                                <div className="text-sm font-bold text-slate-300 mb-1 ml-1">請輸入管理密碼：</div>
                                 <div className="flex items-center gap-2 bg-white px-3 py-2.5 rounded-lg border border-slate-300 shadow-sm focus-within:ring-2 focus-within:ring-amber-500/20">
                                     <KeyRound className="w-5 h-5 text-slate-400 flex-shrink-0" />
                                     <div className="flex-1 relative">
@@ -223,7 +224,7 @@ export const Navbar: React.FC = () => {
                         ) : (
                             <button
                                 onClick={() => setIsLoginMode(true)}
-                                className="flex w-full items-center justify-center gap-2 px-4 py-3 bg-slate-800 text-white rounded-lg font-medium shadow-md active:scale-[0.98] transition-transform"
+                                className="flex w-full items-center justify-center gap-2 px-4 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-base font-semibold shadow-md active:scale-[0.98] transition-transform"
                             >
                                 <Settings className="w-4 h-4" />
                                 進入後台
@@ -232,7 +233,7 @@ export const Navbar: React.FC = () => {
                     ) : (
                         <button
                             onClick={handleExitCMS}
-                            className="flex w-full items-center justify-center gap-2 px-4 py-3 bg-amber-600 text-white rounded-lg font-medium shadow-md active:scale-[0.98] transition-transform"
+                            className="flex w-full items-center justify-center gap-2 px-4 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-base font-semibold shadow-md active:scale-[0.98] transition-transform"
                         >
                             <ArrowLeft className="w-4 h-4" />
                             返回前台
