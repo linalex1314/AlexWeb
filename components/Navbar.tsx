@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useContent } from '../context/ContentContext';
-import { Terminal, Settings, ArrowLeft, Menu, X, KeyRound, Check, Lock, Eye, EyeOff } from 'lucide-react';
+import { Terminal, Settings, ArrowLeft, Menu, X, KeyRound, Check, Lock, Eye, EyeOff, User, Wrench, Trophy, MessageCircle } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const { currentPage, switchPage } = useContent();
@@ -28,10 +28,10 @@ export const Navbar: React.FC = () => {
   const navClass = "fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-amber-600/30 shadow-md transition-all duration-300";
 
   const navItems = [
-    { label: '關於本帳', id: 'about' },
-    { label: '萬能工具箱', id: 'skills' },
-    { label: '專案戰績', id: 'projects' },
-    { label: '和我聯絡', id: 'contact' },
+    { label: '自我介紹', id: 'about', icon: User },
+    { label: '萬能工具箱', id: 'skills', icon: Wrench },
+    { label: '專案戰績', id: 'projects', icon: Trophy },
+    { label: '和我聯絡', id: 'contact', icon: MessageCircle },
   ];
 
   const handleScroll = (id: string) => {
@@ -80,15 +80,19 @@ export const Navbar: React.FC = () => {
             {/* Desktop Navigation */}
             {currentPage === 'home' && !isLoginMode && (
                 <div className="hidden md:flex items-center space-x-1">
-                {navItems.map((item) => (
+                {navItems.map((item) => {
+                    const IconComponent = item.icon;
+                    return (
                     <button
                     key={item.label}
                     onClick={() => handleScroll(item.id)}
-                    className="px-4 py-2 text-base font-semibold text-slate-200 hover:text-amber-400 hover:bg-slate-800 rounded-lg transition-all duration-200"
+                    className="flex items-center gap-2 px-4 py-2 text-lg font-bold text-slate-200 hover:text-amber-400 hover:bg-slate-800 rounded-lg transition-all duration-200"
                     >
+                    <IconComponent className="w-4 h-4" />
                     {item.label}
                     </button>
-                ))}
+                    );
+                })}
                 </div>
             )}
 
@@ -169,15 +173,19 @@ export const Navbar: React.FC = () => {
       {isMenuOpen && (
           <div className="md:hidden bg-slate-900 border-t border-amber-600/30 absolute w-full shadow-xl">
               <div className="px-4 pt-2 pb-6 space-y-2">
-                  {currentPage === 'home' && navItems.map((item) => (
+                  {currentPage === 'home' && navItems.map((item) => {
+                      const IconComponent = item.icon;
+                      return (
                       <button
                           key={item.label}
                           onClick={() => handleScroll(item.id)}
-                          className="block w-full text-left px-4 py-3 text-lg font-semibold text-slate-200 hover:text-amber-400 hover:bg-slate-800 rounded-lg"
+                          className="flex items-center gap-3 w-full text-left px-4 py-3 text-xl font-bold text-slate-200 hover:text-amber-400 hover:bg-slate-800 rounded-lg"
                       >
+                          <IconComponent className="w-5 h-5" />
                           {item.label}
                       </button>
-                  ))}
+                      );
+                  })}
                   
                   <div className="pt-4 mt-4 border-t border-slate-700">
                     {currentPage === 'home' ? (

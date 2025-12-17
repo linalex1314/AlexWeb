@@ -114,7 +114,7 @@ export const INITIAL_PROFILE = {
   name: '資深全端工程師',
   title: 'Senior .NET Developer / System Analyst',
   summary: '擁有多年大型系統開發經驗，專精於 ASP.NET 生態系與 MS SQL 資料庫架構。擅長從需求分析 (SA)、系統設計 (SD) 到程式開發 (PG) 的完整專案生命週期管理。致力於打造高穩定、高效能的企業級應用系統。',
-  email: 'developer@example.com',
+  email: 'linalex1314@gmail.com',
   location: 'Taipei, Taiwan',
 };
 

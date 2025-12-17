@@ -13,34 +13,37 @@ export const Skills: React.FC = () => {
   const { data } = useContent();
 
   return (
-    <section id="skills" className="py-24 bg-slate-900 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-24 bg-gradient-to-br from-slate-950 via-zinc-950 to-neutral-950 relative">
+      {/* Background Accent */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex items-center gap-4 mb-12">
-            <div className="p-3 bg-blue-500/10 rounded-xl border border-blue-500/20">
-                <Wrench className="w-8 h-8 text-blue-400" />
+            <div className="p-3 bg-lime-500/20 rounded-xl border border-lime-400/30">
+                <Wrench className="w-8 h-8 text-lime-400" />
             </div>
             <div>
                 <h2 className="text-3xl font-bold text-white">萬能工具箱</h2>
-                <p className="text-slate-400 mt-1">累積多年的技術軍火庫，隨時準備上陣</p>
+                <p className="text-lime-200/70 mt-1">累積多年的技術軍火庫，隨時準備上陣</p>
             </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {data.skills.map((category) => (
-            <div key={category.id} className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-blue-500/50 transition-all duration-300 group shadow-lg hover:shadow-blue-500/10">
+            <div key={category.id} className="bg-zinc-900/60 backdrop-blur border border-lime-500/20 rounded-xl p-6 hover:bg-zinc-800/70 hover:border-lime-400/40 transition-all duration-300 group shadow-lg hover:shadow-lime-500/10">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-2.5 bg-blue-900/20 rounded-lg text-blue-400 group-hover:text-blue-300 transition-colors border border-blue-500/10">
+                <div className="p-2.5 bg-lime-900/40 rounded-lg text-lime-400 group-hover:text-lime-300 transition-colors border border-lime-500/20">
                   {icons[category.id] || <Code2 className="w-6 h-6" />}
                 </div>
-                <h3 className="font-bold text-lg text-slate-100">{category.title}</h3>
+                <h3 className="font-bold text-lg text-white">{category.title}</h3>
               </div>
               
               <div className="space-y-3">
                 {category.items?.map((item, idx) => (
                   <div key={idx} className="relative group/item">
                     <div className="flex items-center gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 group-hover/item:scale-125 transition-transform"></div>
-                        <span className="text-slate-300 text-sm font-medium group-hover/item:text-white transition-colors">{item}</span>
+                        <div className="w-1.5 h-1.5 rounded-full bg-lime-400 group-hover/item:scale-125 transition-transform"></div>
+                        <span className="text-slate-200 text-sm font-medium group-hover/item:text-lime-300 transition-colors">{item}</span>
                     </div>
                   </div>
                 ))}
