@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
-      base: '/AlexWeb/',
+      base: '/',  // 使用自訂網域時改為 '/'，用 GitHub Pages 子路徑時改為 '/AlexWeb/'
       server: {
         port: 3000,
         host: '0.0.0.0',
