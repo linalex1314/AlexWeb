@@ -61,8 +61,9 @@ export const Navbar: React.FC = () => {
   };
 
   return (
+    <>
     <nav className={navClass}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex justify-between items-center">
             {/* Logo Area */}
             <div 
@@ -166,10 +167,11 @@ export const Navbar: React.FC = () => {
             </div>
         </div>
       </div>
+    </nav>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown - Outside nav to avoid overflow issues */}
       {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-slate-200 fixed left-0 right-0 top-[57px] shadow-xl z-40 max-h-[calc(100vh-57px)] overflow-y-auto">
+          <div className="md:hidden bg-white border-t border-slate-200 fixed left-0 right-0 top-[56px] shadow-xl z-[60] max-h-[calc(100vh-56px)] overflow-y-auto">
               <div className="px-4 pt-2 pb-6 space-y-2">
                   {currentPage === 'home' && navItems.map((item) => {
                       const IconComponent = item.icon;
@@ -249,6 +251,6 @@ export const Navbar: React.FC = () => {
               </div>
           </div>
       )}
-    </nav>
+    </>
   );
 };
