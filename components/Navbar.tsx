@@ -25,7 +25,7 @@ export const Navbar: React.FC = () => {
     }
   }, [isLoginMode]);
 
-  const navClass = "fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-md transition-all duration-300";
+  const navClass = "fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-md transition-all duration-300 overflow-x-hidden";
 
   const navItems = [
     { label: '自我介紹', id: 'about', icon: User },
@@ -62,16 +62,16 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav className={navClass}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 overflow-hidden">
         <div className="flex justify-between items-center">
             {/* Logo Area */}
             <div 
                 className="flex items-center gap-3 group cursor-pointer" 
                 onClick={() => switchPage('home')}
             >
-                <img src="/logo.png" alt="Fidogood" className="w-10 h-10 object-contain" />
-                <span className="text-2xl font-bold text-slate-800 tracking-wider">
-                    Fidogood <span className="text-sm font-normal text-blue-600 ml-1 block sm:inline">{currentPage === 'cms' ? 'CMS Mode' : '飛朵資訊'}</span>
+                <img src="/logo.png" alt="Fidogood" className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0" />
+                <span className="text-lg sm:text-2xl font-bold text-slate-800 tracking-wider truncate">
+                    Fidogood <span className="text-xs sm:text-sm font-normal text-blue-600 ml-1 hidden sm:inline">{currentPage === 'cms' ? 'CMS Mode' : '飛朵資訊'}</span>
                 </span>
             </div>
             

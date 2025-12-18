@@ -12,7 +12,7 @@ const MainContent: React.FC = () => {
     const { currentPage } = useContent();
 
     return (
-        <div className="min-h-screen bg-slate-900 text-slate-200 font-sans selection:bg-blue-500 selection:text-white">
+        <div className="min-h-screen bg-slate-900 text-slate-200 font-sans selection:bg-blue-500 selection:text-white overflow-x-hidden">
             <Navbar />
             
             {currentPage === 'home' ? (
