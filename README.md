@@ -11,12 +11,13 @@
 | ID | 功能名稱 | 描述 | 優先級 |
 |----|---------|------|--------|
 | F01 | 自我介紹 | 展示個人簡介、職稱、Email、所在地 | P0 |
-| F02 | 技能展示 | 分類顯示技術技能（Backend、Database、Frontend、SA） | P0 |
+| F02 | 技能樹 | 分類顯示技術技能（Backend、Database、Frontend、SA） | P0 |
 | F03 | 專案戰績 | 列表顯示歷年專案、使用技術、擔任角色 | P0 |
-| F04 | 聯絡表單 | 訪客可填寫表單發送郵件給站長 | P1 |
-| F05 | CMS 後台 | 密碼保護的內容管理系統，可編輯所有內容 | P1 |
-| F06 | 響應式設計 | 支援桌面、平板、手機瀏覽 | P0 |
-| F07 | 深色主題 | 深藍色背景搭配互補色區塊設計 | P2 |
+| F04 | 萬能工具 | 展示開發工具、雲端服務、DevOps 工具等 | P0 |
+| F05 | 聯絡表單 | 訪客可填寫表單發送郵件給站長 | P1 |
+| F06 | CMS 後台 | 密碼保護的內容管理系統，可編輯所有內容 | P1 |
+| F07 | 多頁式導覽 | 點選導覽列項目後開啟獨立頁面 | P0 |
+| F08 | 響應式設計 | 支援桌面、平板、手機瀏覽 | P0 |
 
 ### 非功能需求
 
@@ -66,12 +67,13 @@ App
 ├── ContentProvider          # 全域狀態提供者
 │   └── MainContent
 │       ├── Navbar           # 導覽列（含登入功能）
-│       ├── [Home Page]
-│       │   ├── Hero         # 自我介紹
-│       │   ├── Skills       # 技能展示
-│       │   ├── Projects     # 專案戰績
-│       │   ├── Contact      # 聯絡表單
-│       │   └── Footer       # 頁尾
+│       ├── [多頁式導覽]
+│       │   ├── Hero         # 自我介紹頁面
+│       │   ├── Skills       # 技能樹頁面
+│       │   ├── Projects     # 專案戰績頁面
+│       │   ├── Tools        # 萬能工具頁面
+│       │   └── Contact      # 聯絡表單頁面
+│       ├── Footer           # 頁尾
 │       └── [CMS Page]
 │           └── CMS          # 後台管理介面
 ```
@@ -82,8 +84,9 @@ App
 |------|---------|--------|
 | Navbar | white (淺色系) | blue |
 | Hero（自我介紹） | cyan/sky/blue | cyan |
-| Skills（萬能工具箱） | slate/zinc/neutral | lime |
+| Skills（技能樹） | slate/zinc/neutral | lime |
 | Projects（專案戰績） | orange/red/rose | amber |
+| Tools（萬能工具） | slate/zinc | amber |
 | Contact（和我聯絡） | slate/indigo | violet |
 | Footer | slate-100 (淺色系) | blue |
 

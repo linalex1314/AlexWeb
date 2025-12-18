@@ -6,7 +6,7 @@ export const Projects: React.FC = () => {
   const { data } = useContent();
 
   return (
-    <section id="projects" className="py-24 bg-gradient-to-br from-orange-950 via-red-950 to-rose-950">
+    <section id="projects" className="min-h-screen pt-24 pb-16 bg-gradient-to-br from-orange-950 via-red-950 to-rose-950">
       {/* Background Accent */}
       <div className="absolute top-1/2 right-0 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
       

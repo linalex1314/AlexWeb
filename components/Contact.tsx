@@ -86,7 +86,7 @@ export const Contact: React.FC = () => {
     };
 
     return (
-        <section id="contact" className="py-24 relative overflow-hidden bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950">
+        <section id="contact" className="min-h-screen pt-24 pb-16 relative overflow-hidden bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950">
             {/* Background Accent */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-violet-500/10 blur-[100px] pointer-events-none" />
             

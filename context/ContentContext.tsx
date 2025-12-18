@@ -4,19 +4,21 @@ import { INITIAL_DATA } from '../constants';
 
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
+type PageType = 'home' | 'about' | 'skills' | 'projects' | 'tools' | 'contact' | 'cms';
+
 export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [data, setData] = useState<AppData>(() => {
     const saved = localStorage.getItem('portfolio_data_v1');
     return saved ? JSON.parse(saved) : INITIAL_DATA;
   });
 
-  const [currentPage, setCurrentPage] = useState<'home' | 'cms'>('home');
+  const [currentPage, setCurrentPage] = useState<PageType>('home');
 
   useEffect(() => {
     localStorage.setItem('portfolio_data_v1', JSON.stringify(data));
   }, [data]);
 
-  const switchPage = (page: 'home' | 'cms') => {
+  const switchPage = (page: PageType) => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
   };

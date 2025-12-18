@@ -13,7 +13,7 @@ export const Skills: React.FC = () => {
   const { data } = useContent();
 
   return (
-    <section id="skills" className="py-24 bg-gradient-to-br from-slate-950 via-zinc-950 to-neutral-950 relative">
+    <section id="skills" className="min-h-screen pt-24 pb-16 bg-gradient-to-br from-slate-950 via-zinc-950 to-neutral-950 relative">
       {/* Background Accent */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
       
@@ -23,7 +23,7 @@ export const Skills: React.FC = () => {
                 <Wrench className="w-8 h-8 text-lime-400" />
             </div>
             <div>
-                <h2 className="text-3xl font-bold text-white">萬能工具箱</h2>
+                <h2 className="text-3xl font-bold text-white">技能樹</h2>
                 <p className="text-lime-200/70 mt-1">累積多年的技術軍火庫，隨時準備上陣</p>
             </div>
         </div>

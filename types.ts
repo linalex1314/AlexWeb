@@ -28,8 +28,8 @@ export interface AppData {
 
 export interface ContentContextType {
   data: AppData;
-  currentPage: 'home' | 'cms';
-  switchPage: (page: 'home' | 'cms') => void;
+  currentPage: 'home' | 'about' | 'skills' | 'projects' | 'tools' | 'contact' | 'cms';
+  switchPage: (page: 'home' | 'about' | 'skills' | 'projects' | 'tools' | 'contact' | 'cms') => void;
   updateProfile: (field: keyof Profile, value: string) => void;
   updateProject: (id: string, field: keyof Project, value: any) => void;
   addProject: () => void;

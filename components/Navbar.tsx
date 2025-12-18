@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useContent } from '../context/ContentContext';
-import { Terminal, Settings, ArrowLeft, Menu, X, KeyRound, Check, Lock, Eye, EyeOff, User, Wrench, Trophy, MessageCircle } from 'lucide-react';
+import { Terminal, Settings, ArrowLeft, Menu, X, KeyRound, Check, Lock, Eye, EyeOff, User, Wrench, Trophy, MessageCircle, Home, Hammer } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const { currentPage, switchPage } = useContent();
@@ -29,17 +29,15 @@ export const Navbar: React.FC = () => {
 
   const navItems = [
     { label: '自我介紹', id: 'about', icon: User },
-    { label: '萬能工具箱', id: 'skills', icon: Wrench },
+    { label: '技能樹', id: 'skills', icon: Wrench },
     { label: '專案戰績', id: 'projects', icon: Trophy },
+    { label: '萬能工具', id: 'tools', icon: Hammer },
     { label: '和我聯絡', id: 'contact', icon: MessageCircle },
   ];
 
-  const handleScroll = (id: string) => {
+  const handleNavClick = (id: string) => {
       setIsMenuOpen(false);
-      const element = document.getElementById(id);
-      if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-      }
+      switchPage(id as any);
   };
 
   const handleLoginSubmit = (e?: React.FormEvent) => {
@@ -77,15 +75,16 @@ export const Navbar: React.FC = () => {
             </div>
             
             {/* Desktop Navigation */}
-            {currentPage === 'home' && !isLoginMode && (
+            {currentPage !== 'cms' && !isLoginMode && (
                 <div className="hidden md:flex items-center space-x-1">
                 {navItems.map((item) => {
                     const IconComponent = item.icon;
+                    const isActive = currentPage === item.id;
                     return (
                     <button
                     key={item.label}
-                    onClick={() => handleScroll(item.id)}
-                    className="flex items-center gap-2 px-4 py-2 text-lg font-bold text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                    onClick={() => handleNavClick(item.id)}
+                    className={`flex items-center gap-2 px-4 py-2 text-lg font-bold rounded-lg transition-all duration-200 ${isActive ? 'text-blue-600 bg-blue-50' : 'text-slate-700 hover:text-blue-600 hover:bg-blue-50'}`}
                     >
                     <IconComponent className="w-4 h-4" />
                     {item.label}
@@ -142,13 +141,21 @@ export const Navbar: React.FC = () => {
                         <span>進入後台</span>
                     </button>
                 )
-            ) : (
+            ) : currentPage === 'cms' ? (
                 <button
                     onClick={handleExitCMS}
                     className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-base font-semibold transition-colors shadow-md"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     <span>返回前台</span>
+                </button>
+            ) : (
+                <button
+                    onClick={() => setIsLoginMode(true)}
+                    className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-base font-semibold transition-colors shadow-md hover:shadow-lg"
+                >
+                    <Settings className="w-4 h-4" />
+                    <span>進入後台</span>
                 </button>
             )}
             </div>
@@ -173,13 +180,14 @@ export const Navbar: React.FC = () => {
       {isMenuOpen && (
           <div className="md:hidden bg-white border-t border-slate-200 fixed left-0 right-0 top-[56px] shadow-xl z-[60] max-h-[calc(100vh-56px)] overflow-y-auto">
               <div className="px-4 pt-2 pb-6 space-y-2">
-                  {currentPage === 'home' && navItems.map((item) => {
+                  {currentPage !== 'cms' && navItems.map((item) => {
                       const IconComponent = item.icon;
+                      const isActive = currentPage === item.id;
                       return (
                       <button
                           key={item.label}
-                          onClick={() => handleScroll(item.id)}
-                          className="flex items-center gap-3 w-full text-left px-4 py-3 text-xl font-bold text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg"
+                          onClick={() => handleNavClick(item.id)}
+                          className={`flex items-center gap-3 w-full text-left px-4 py-3 text-xl font-bold rounded-lg ${isActive ? 'text-blue-600 bg-blue-50' : 'text-slate-700 hover:text-blue-600 hover:bg-blue-50'}`}
                       >
                           <IconComponent className="w-5 h-5" />
                           {item.label}
@@ -188,7 +196,7 @@ export const Navbar: React.FC = () => {
                   })}
                   
                   <div className="pt-4 mt-4 border-t border-slate-200">
-                    {currentPage === 'home' ? (
+                    {currentPage !== 'cms' ? (
                         isLoginMode ? (
                              <form onSubmit={handleLoginSubmit} className="flex flex-col gap-3 p-3 bg-slate-100 rounded-xl border border-slate-200 shadow-inner">
                                 <div className="text-sm font-bold text-slate-600 mb-1 ml-1">請輸入管理密碼：</div>

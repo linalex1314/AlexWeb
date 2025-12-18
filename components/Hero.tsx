@@ -7,7 +7,7 @@ export const Hero: React.FC = () => {
   const { profile } = data;
 
   return (
-    <section id="about" className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-br from-cyan-950 via-sky-950 to-blue-950">
+    <section id="about" className="relative min-h-screen pt-24 pb-20 overflow-hidden bg-gradient-to-br from-cyan-950 via-sky-950 to-blue-950">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
