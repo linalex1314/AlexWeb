@@ -169,7 +169,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-slate-200 absolute w-full shadow-xl">
+          <div className="md:hidden bg-white border-t border-slate-200 fixed left-0 right-0 top-[57px] shadow-xl z-40 max-h-[calc(100vh-57px)] overflow-y-auto">
               <div className="px-4 pt-2 pb-6 space-y-2">
                   {currentPage === 'home' && navItems.map((item) => {
                       const IconComponent = item.icon;
