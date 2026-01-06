@@ -81,7 +81,7 @@ export const Tools: React.FC = () => {
                         </h4>
                         <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-amber-400 transition-colors flex-shrink-0 mt-1" />
                       </div>
-                      <p className="text-slate-400 text-sm leading-relaxed">
+                      <p className="text-slate-400 text-sm leading-relaxed whitespace-pre-line">
                         {tool.description}
                       </p>
                     </a>
