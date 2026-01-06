@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { AppData, ContentContextType, Profile, Project, SkillCategory } from '../types';
+import { AppData, ContentContextType, Profile, Project, SkillCategory, Tool } from '../types';
 import { INITIAL_DATA } from '../constants';
 
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
@@ -86,6 +86,34 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
     }));
   };
 
+  const updateTool = (id: string, field: keyof Tool, value: any) => {
+    setData((prev) => ({
+      ...prev,
+      tools: prev.tools.map((t) => (t.id === id ? { ...t, [field]: value } : t)),
+    }));
+  };
+
+  const addTool = () => {
+    const newTool: Tool = {
+      id: Date.now().toString(),
+      title: '新工具',
+      url: 'https://',
+      description: '請輸入說明...',
+      category: '好用工具',
+    };
+    setData((prev) => ({
+      ...prev,
+      tools: [newTool, ...prev.tools],
+    }));
+  };
+
+  const deleteTool = (id: string) => {
+    setData((prev) => ({
+      ...prev,
+      tools: prev.tools.filter((t) => t.id !== id),
+    }));
+  };
+
   const resetData = () => {
     // Confirmation moved to UI component
     setData(INITIAL_DATA);
@@ -104,6 +132,9 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
         updateSkillCategory,
         addSkillCategory,
         deleteSkillCategory,
+        updateTool,
+        addTool,
+        deleteTool,
         resetData
       }}
     >

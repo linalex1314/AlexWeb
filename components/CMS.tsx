@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useContent } from '../context/ContentContext';
-import { RefreshCw, User, Briefcase, Wrench, Plus, Trash2, X, Check, AlertTriangle } from 'lucide-react';
+import { RefreshCw, User, Briefcase, Wrench, Plus, Trash2, X, Check, AlertTriangle, Hammer } from 'lucide-react';
 
 export const CMS: React.FC = () => {
   const { 
@@ -12,12 +12,15 @@ export const CMS: React.FC = () => {
       updateSkillCategory, 
       addSkillCategory,
       deleteSkillCategory,
+      updateTool,
+      addTool,
+      deleteTool,
       resetData 
   } = useContent();
 
   // State to track which item is currently asking for delete confirmation
-  // Format: { type: 'project' | 'skill' | 'reset', id?: string }
-  const [confirmState, setConfirmState] = useState<{type: 'project' | 'skill' | 'reset', id?: string} | null>(null);
+  // Format: { type: 'project' | 'skill' | 'tool' | 'reset', id?: string }
+  const [confirmState, setConfirmState] = useState<{type: 'project' | 'skill' | 'tool' | 'reset', id?: string} | null>(null);
 
   // Helper to delete a specific line item from the tech/role arrays
   const removeArrayItem = (
@@ -53,6 +56,15 @@ export const CMS: React.FC = () => {
           setConfirmState(null);
       } else {
           setConfirmState({ type: 'skill', id });
+      }
+  };
+
+  const handleToolDelete = (id: string) => {
+      if (confirmState?.type === 'tool' && confirmState.id === id) {
+          deleteTool(id);
+          setConfirmState(null);
+      } else {
+          setConfirmState({ type: 'tool', id });
       }
   };
 
@@ -331,6 +343,102 @@ export const CMS: React.FC = () => {
                                 className="w-full bg-slate-800 border border-slate-600 rounded p-2 text-slate-300 focus:border-purple-500 outline-none"
                                 value={project.roles.join(', ')}
                                 onChange={(e) => updateProject(project.id, 'roles', e.target.value.split(',').map(r => r.trim()))}
+                            />
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        {/* 4. Tools Section */}
+        <section className="bg-slate-800 rounded-xl p-6 border border-slate-700 shadow-lg mb-8">
+            <div className="flex items-center justify-between mb-6 border-b border-slate-700 pb-4">
+                <div className="flex items-center gap-3">
+                    <Hammer className="w-6 h-6 text-amber-400" />
+                    <h2 className="text-xl font-bold text-white">萬能工具 (Tools)</h2>
+                </div>
+                <button 
+                    type="button"
+                    onClick={addTool}
+                    className="flex items-center gap-2 px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded text-sm transition-colors"
+                >
+                    <Plus className="w-4 h-4" />
+                    新增工具
+                </button>
+            </div>
+            
+            <div className="space-y-6">
+                {data.tools.map((tool) => (
+                    <div key={tool.id} className="relative bg-slate-900 p-6 rounded-lg border border-slate-700 hover:border-amber-500/50 transition-colors">
+                        {/* Tool Delete Logic */}
+                        <div className="absolute top-4 right-4 z-10">
+                            {confirmState?.type === 'tool' && confirmState.id === tool.id ? (
+                                <div className="flex items-center gap-2 bg-slate-800 p-1.5 rounded-lg border border-red-500/50 shadow-xl animate-in fade-in duration-200">
+                                    <span className="text-red-400 text-xs font-bold pl-1 hidden sm:inline">確認刪除?</span>
+                                    <button 
+                                        onClick={() => handleToolDelete(tool.id)}
+                                        className="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded text-xs font-bold flex items-center gap-1"
+                                    >
+                                        <Check className="w-3 h-3" /> 是
+                                    </button>
+                                    <button 
+                                        onClick={cancelAction}
+                                        className="bg-slate-600 hover:bg-slate-500 text-white px-3 py-1.5 rounded text-xs font-bold flex items-center gap-1"
+                                    >
+                                        <X className="w-3 h-3" /> 否
+                                    </button>
+                                </div>
+                            ) : (
+                                <button 
+                                    type="button"
+                                    onClick={() => handleToolDelete(tool.id)}
+                                    className="p-2 bg-slate-800 text-slate-400 hover:text-red-400 hover:bg-slate-700 rounded-lg transition-colors cursor-pointer border border-slate-700 shadow-sm"
+                                    title="刪除此工具"
+                                >
+                                    <Trash2 className="w-5 h-5" />
+                                </button>
+                            )}
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-4 mb-4 pr-12">
+                            <div>
+                                <label className="block text-xs font-bold text-slate-500 uppercase mb-1">標題</label>
+                                <input 
+                                    className="w-full bg-slate-800 border border-slate-600 rounded p-2 text-white focus:border-amber-500 outline-none"
+                                    value={tool.title}
+                                    onChange={(e) => updateTool(tool.id, 'title', e.target.value)}
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-bold text-slate-500 uppercase mb-1">分類</label>
+                                <select 
+                                    className="w-full bg-slate-800 border border-slate-600 rounded p-2 text-white focus:border-amber-500 outline-none"
+                                    value={tool.category}
+                                    onChange={(e) => updateTool(tool.id, 'category', e.target.value)}
+                                >
+                                    <option value="好用工具">好用工具</option>
+                                    <option value="小遊戲">小遊戲</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="mb-4">
+                            <label className="block text-xs font-bold text-slate-500 uppercase mb-1">超連結</label>
+                            <input 
+                                className="w-full bg-slate-800 border border-slate-600 rounded p-2 text-slate-300 focus:border-amber-500 outline-none"
+                                value={tool.url}
+                                onChange={(e) => updateTool(tool.id, 'url', e.target.value)}
+                                placeholder="https://..."
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-xs font-bold text-slate-500 uppercase mb-1">說明</label>
+                            <textarea 
+                                className="w-full bg-slate-800 border border-slate-600 rounded p-2 text-slate-300 focus:border-amber-500 outline-none"
+                                rows={2}
+                                value={tool.description}
+                                onChange={(e) => updateTool(tool.id, 'description', e.target.value)}
                             />
                         </div>
                     </div>

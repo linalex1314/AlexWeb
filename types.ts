@@ -20,10 +20,21 @@ export interface Profile {
   location: string;
 }
 
+export type ToolCategory = '好用工具' | '小遊戲';
+
+export interface Tool {
+  id: string;
+  title: string;
+  url: string;
+  description: string;
+  category: ToolCategory;
+}
+
 export interface AppData {
   profile: Profile;
   skills: SkillCategory[];
   projects: Project[];
+  tools: Tool[];
 }
 
 export interface ContentContextType {
@@ -37,5 +48,8 @@ export interface ContentContextType {
   updateSkillCategory: (id: string, title: string, items: string[]) => void;
   addSkillCategory: () => void;
   deleteSkillCategory: (id: string) => void;
+  updateTool: (id: string, field: keyof Tool, value: any) => void;
+  addTool: () => void;
+  deleteTool: (id: string) => void;
   resetData: () => void;
 }

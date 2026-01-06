@@ -1,4 +1,4 @@
-import { AppData, Project, SkillCategory } from './types';
+import { AppData, Project, SkillCategory, Tool } from './types';
 
 export const INITIAL_PROJECTS: Project[] = [
   {
@@ -118,8 +118,40 @@ export const INITIAL_PROFILE = {
   location: 'Taipei, Taiwan',
 };
 
+export const INITIAL_TOOLS: Tool[] = [
+  {
+    id: 't1',
+    title: 'VS Code',
+    url: 'https://code.visualstudio.com/',
+    description: '強大的程式碼編輯器',
+    category: '好用工具',
+  },
+  {
+    id: 't2',
+    title: 'ChatGPT',
+    url: 'https://chat.openai.com/',
+    description: 'AI 聊天助手',
+    category: '好用工具',
+  },
+  {
+    id: 't3',
+    title: '貪食蛇',
+    url: 'https://playsnake.org/',
+    description: '經典貪食蛇遊戲',
+    category: '小遊戲',
+  },
+  {
+    id: 't4',
+    title: '2048',
+    url: 'https://play2048.co/',
+    description: '數字益智遊戲',
+    category: '小遊戲',
+  },
+];
+
 export const INITIAL_DATA: AppData = {
   profile: INITIAL_PROFILE,
   skills: INITIAL_SKILLS,
   projects: INITIAL_PROJECTS,
+  tools: INITIAL_TOOLS,
 };
