@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { AppData, ContentContextType, Profile, Project, SkillCategory, Tool } from '../types';
-import { INITIAL_DATA } from '../constants';
+import { INITIAL_DATA, INITIAL_TOOLS } from '../constants';
 
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
@@ -9,7 +9,15 @@ type PageType = 'home' | 'about' | 'skills' | 'projects' | 'tools' | 'contact' |
 export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [data, setData] = useState<AppData>(() => {
     const saved = localStorage.getItem('portfolio_data_v1');
-    return saved ? JSON.parse(saved) : INITIAL_DATA;
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // 確保 tools 欄位存在（相容舊資料）
+      if (!parsed.tools) {
+        parsed.tools = INITIAL_TOOLS;
+      }
+      return parsed;
+    }
+    return INITIAL_DATA;
   });
 
   const [currentPage, setCurrentPage] = useState<PageType>('home');
